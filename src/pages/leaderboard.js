@@ -1,15 +1,42 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import * as query from "../contract/query";
+import { useState, useEffect } from "react";
+import * as execute from "../contract/execute";
 import WalletAddress from "../components/WalletAddress";
+import { useConnectedWallet } from "@terra-money/wallet-provider";
 
 const Leaderboard = () => {
-    const [scores, setScores] = useState([
-        ["terra1lqu0yqdqr2qwv40w9mk5v25s2sr4udy7830hvy", "2100"],
-        ["terra1lqu0yqdqr2qwv40w9mk5v25s2sr4udy7830ase", "1933"],
-        ["terra1lqu0yqdqr2qwv40w9mk5v25s2sr4udy7831kj2", "100"],
-        ["terra1lqu0yqdqr2qwv40w9mk5v25s2sr4udy7834k3j", "50"],
-        ["terra1lqu0yqdqr2qwv40w9mk5v25s2sr4udy7830aks", "25"],
-    ]);
+    const [scores, setScores] = useState();
+    const [updating, setUpdating] = useState(true);
+    const connectedWallet = useConnectedWallet();
+
+    useEffect(async () => {
+        if (connectedWallet) {
+            console.log("Connected wallet is", connectedWallet.terraAddress);
+            console.log("Connected on network", connectedWallet.network.name, "with chainID", connectedWallet.network.chainID);
+
+            setScores((await query.getScores(connectedWallet)).scores);
+        }
+    }, [connectedWallet]);
+
+    const onClickSetScore = async (score) => {
+        setUpdating(true);
+        await execute.setScore(connectedWallet, score);
+        setScores((await query.getScores(connectedWallet)).scores);
+        setUpdating(false);
+    };
+
+    const inputScore = () => {
+        // Get input using prompt
+        const score = prompt("Enter a new score");
+        if (score) {
+            // convert score to int
+            const scoreInt = parseInt(score);
+            if (scoreInt) {
+                onClickSetScore(scoreInt);
+            }
+        }
+    };
 
     const renderScoreboard = () => {
         if (scores) {
@@ -40,6 +67,10 @@ const Leaderboard = () => {
                             );
                         })}
                     </div>
+
+                    <button onClick={inputScore} type="button" className="cta-button connect-wallet-button set-score-btn">
+                        Set score manually
+                    </button>
                 </div>
             );
         }

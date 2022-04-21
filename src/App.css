@@ -142,6 +142,10 @@ span {
     background-image: linear-gradient(to right, #ff6e7f 0%, #f09819 100%);
 }
 
+.set-score-btn {
+    margin-top: 50px;
+}
+
 #marine-img {
     position: absolute;
     top: 80%;
