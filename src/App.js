@@ -31,16 +31,16 @@ function App() {
     return (
         <main className="App">
             <header className="app-header-container">
-                {/* <div style={{ display: "inline" }}>
-                    SPEED: {speed} {updating ? "(updating . . .)" : ""}
-                </div> */}
-
                 <div className="game-app-header">
                     <h1>⚔ Goblin War ⚔</h1>
                     <p>Only you can save us from Goblin town</p>
                 </div>
 
                 <WalletAddress />
+
+                <div style={{ display: "inline" }}>
+                    SPEED: {speed} {updating ? "(updating . . .)" : ""}
+                </div>
 
                 {status === WalletStatus.WALLET_CONNECTED && (
                     <div>
