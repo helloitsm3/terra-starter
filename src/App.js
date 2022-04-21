@@ -1,7 +1,11 @@
 import "./App.css";
 
-import { useEffect, useState } from "react";
+import * as query from "./contract/query";
 import GameMenu from "./components/GameMenu";
+import * as execute from "./contract/execute";
+import WalletAddress from "./components/WalletAddress";
+
+import { useEffect, useState } from "react";
 import { ConnectWallet } from "./components/ConnectWallet";
 import { useWallet, useConnectedWallet, WalletStatus } from "@terra-money/wallet-provider";
 
@@ -9,7 +13,7 @@ function App() {
     const { status } = useWallet();
     const [speed, setSpeed] = useState(null);
     const [updating, setUpdating] = useState(true);
-    // const connectedWallet = useConnectedWallet();
+    const connectedWallet = useConnectedWallet();
 
     useEffect(() => {
         const prefetch = async () => {
@@ -25,27 +29,27 @@ function App() {
         prefetch();
     }, []);
 
-    const onClickSetScore = async (score) => {
-        setUpdating(true);
-        // await execute.setScore(connectedWallet, score);
-        // setScores((await query.getScores(connectedWallet)).scores);
-        setUpdating(false);
-    };
+    // const onClickSetScore = async (score) => {
+    //     setUpdating(true);
+    //     await execute.setScore(connectedWallet, score);
+    //     setScores((await query.getScores(connectedWallet)).scores);
+    //     setUpdating(false);
+    // };
 
     const inputScore = () => {
-        // Get input using prompt
-        const score = prompt("Enter a new score");
-        if (score) {
-            // convert score to int
-            const scoreInt = parseInt(score);
-            if (scoreInt) {
-                onClickSetScore(scoreInt);
-            }
-        }
+        //     // Get input using prompt
+        //     const score = prompt("Enter a new score");
+        //     if (score) {
+        //         // convert score to int
+        //         const scoreInt = parseInt(score);
+        //         if (scoreInt) {
+        //             onClickSetScore(scoreInt);
+        //         }
+        //     }
     };
 
     return (
-        <div className="App">
+        <main className="App">
             <header className="app-header-container">
                 {/* <div style={{ display: "inline" }}>
                     SPEED: {speed} {updating ? "(updating . . .)" : ""}
@@ -55,6 +59,8 @@ function App() {
                     <h1>⚔ Goblin War ⚔</h1>
                     <p>Only you can save us from Goblin town</p>
                 </div>
+
+                <WalletAddress />
 
                 {status === WalletStatus.WALLET_CONNECTED && (
                     <div>
@@ -67,7 +73,7 @@ function App() {
 
                 <ConnectWallet />
             </header>
-        </div>
+        </main>
     );
 }
 

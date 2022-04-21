@@ -63,15 +63,6 @@ span {
     animation: gradient-animation 4s ease infinite;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .footer-container {
     display: flex;
     justify-content: center;
@@ -141,6 +132,14 @@ span {
     min-height: 80vh;
     min-width: 80vw;
     margin: 20px;
+}
+
+.user-address-btn {
+    position: absolute;
+    right: 50px;
+    top: 30px;
+    animation: gradient-animation 4s ease infinite;
+    background-image: linear-gradient(to right, #ff6e7f 0%, #f09819 100%);
 }
 
 #marine-img {

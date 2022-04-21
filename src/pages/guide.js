@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import WalletAddress from "../components/WalletAddress";
 
 const Guide = () => {
     return (
@@ -9,6 +10,8 @@ const Guide = () => {
                     <p>Only you can save us from Goblin town</p>
                 </div>
             </Link>
+
+            <WalletAddress />
 
             <p>Guides</p>
         </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import WalletAddress from "../components/WalletAddress";
 
 const Leaderboard = () => {
     const [scores, setScores] = useState([
@@ -20,6 +21,8 @@ const Leaderboard = () => {
                             <p>Only you can save us from Goblin town</p>
                         </div>
                     </Link>
+
+                    <WalletAddress />
 
                     <h3>Scoreboard</h3>
                     <div>
