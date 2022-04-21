@@ -17,7 +17,7 @@ function App() {
 
     useEffect(() => {
         const prefetch = async () => {
-            if (connectedWallet) {
+            if (connectedWallet && connectedWallet.network.name != "mainnet") {
                 console.log("Connected wallet is", connectedWallet.terraAddress);
                 console.log("Connected on network", connectedWallet.network.name, "with chainID", connectedWallet.network.chainID);
 
@@ -28,7 +28,9 @@ function App() {
         prefetch();
     }, [connectedWallet]);
 
-    return (
+    return connectedWallet?.network?.name === "mainnet" ? (
+        <span>Please connect to testnet or localnet</span>
+    ) : (
         <main className="App">
             <header className="app-header-container">
                 <div className="game-app-header">
