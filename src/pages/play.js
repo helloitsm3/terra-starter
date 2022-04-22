@@ -24,8 +24,9 @@ const Play = () => {
                     style={{
                         position: "absolute",
                         height: "100px",
-                        top: Math.floor((index + 1) * 0.2 * divRef?.current?.offsetHeight),
-                        left: Math.floor((index + 1) * 0.2 * divRef?.current?.offsetWidth),
+                        top: Math.floor(Math.random() * (divRef?.current?.offsetHeight - 550)) + 250,
+                        left: Math.floor(Math.random() * (divRef?.current?.offsetWidth - 250)) + 250,
+                        transform: "translate(-50%, -50%)",
                     }}
                 />
             ));
