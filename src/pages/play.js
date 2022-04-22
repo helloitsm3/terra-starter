@@ -5,10 +5,8 @@ const Play = () => {
     const divRef = useRef();
     const [playing, setPlaying] = useState(false);
     const [timeLeft, setTimeLeft] = useState(maxTime);
-    const [audio] = useState(new Audio("/Zergling_explodes.mp3"));
 
     useEffect(() => {
-        audio.volume = 0.2;
         const interval = setInterval(() => {
             setTimeLeft((prev) => (prev <= 0 ? (prev = maxTime) : (prev -= 1)));
         }, 1000);
@@ -37,11 +35,9 @@ const Play = () => {
     };
 
     const togglePlay = () => {
-        if (playing) {
-            audio.play();
-        }
-
-        setPlaying(!playing);
+        let audio = new Audio("/Zergling_explodes.mp3");
+        audio.volume = 0.2;
+        audio.play();
     };
 
     return (
